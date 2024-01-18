@@ -764,7 +764,8 @@
   } );
   </script>
         <script>
-            fetch('https://vendor-list.consensu.org/v3/vendor-list.json')
+            //'https://vendor-list.consensu.org/v3/vendor-list.json'
+            fetch("vendorlist.json")
     .then((response) => response.json())
     .then((json) => {
         var purposes = json["purposes"];
