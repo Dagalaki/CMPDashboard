@@ -44,11 +44,11 @@ ON all_users.user_id = edited_users.user_id";
 
 		$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS partially_accepted_percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE DATE(timestamp) BETWEEN '2024-11-19' AND '2024-11-19') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (40,50,39,128,78,758,755,98,278,812,373,140,68,32,76,52,285,293,70,21,788,126,394,707,1126,136,1057,16,264,25,565,156,24,11,793,202,1127,985,115,1019,1206,758) AND consent_value = 1 AND DATE(timestamp) BETWEEN '2024-11-19' AND '2024-11-19' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) < 41) AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
 
-			$result = $conn->query($q);
+			$result = $conn->query($query);
 
 			
 			if ($result === false) {
-			    die("Error in query execution: " . $conn->error);
+			    die("(".$q.")Error in query execution: " . $conn->error);
 			}
 
 			
