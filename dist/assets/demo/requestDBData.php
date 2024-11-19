@@ -1,5 +1,5 @@
 <?php
-	$servername = "smarttv.anixa.tv";
+	$servername = "localhost";
 	$username = "cmp_user";
 	$password = "fjurtiolunb";
 	$db = "cmp";
