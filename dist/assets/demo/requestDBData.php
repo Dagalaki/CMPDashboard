@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: application/json");
 	$servername = "localhost";
 	$username = "cmp_user";
 	$password = "fjurtiolunb";
@@ -65,9 +66,8 @@ ON all_users.user_id = edited_users.user_id";
 			    'data' => $data
 			];
 
-			header('Content-Type: application/json');
 			echo json_encode($ret);
-
+exit();
 	}else if($mode== "refused"){
 
 /* 
