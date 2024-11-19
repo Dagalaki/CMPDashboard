@@ -107,11 +107,9 @@
                                
 
 <div class="custom-select" style="width:200px;">
-  <select>
-    <option value="0">Select a publisher:</option>
-    <option value="1">Aplha</option>
-    <option value="2">Star</option>
-    <option value="3">Skai</option>
+  <select id="vendor">
+    <option value="0">Select vendor:</option>
+    <option value="40">Active Agent</option>
   </select>
 </div>
                             </div>
@@ -123,7 +121,9 @@
                                 <input type="text" id="to" name="to">
 
                             </div>
-                            <div class="col-xl-3 col-md-6"></div>
+                            <div class="col-xl-3 col-md-6">
+                                <button id="load-btn" onclick="populateCharts();">LOAD</button>
+                            </div>
                         </div>
                         <div class="row" style="height:30px"></div>
                         <div class="row">
@@ -263,12 +263,13 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script>
   $( function() {
-    var dateFormat = "mm/dd/yy",
+    var dateFormat = "yy-mm-dd",
       from = $( "#from" )
         .datepicker({
           defaultDate: "+1w",
           changeMonth: true,
-          numberOfMonths: 3
+          numberOfMonths: 3,
+          dateFormat: "yyyy-mm-dd"
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ) );
@@ -276,13 +277,15 @@
       to = $( "#to" ).datepicker({
         defaultDate: "+1w",
         changeMonth: true,
-        numberOfMonths: 3
+        numberOfMonths: 3,
+        dateFormat: "yy-mm-dd"
       })
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ) );
       });
  
     function getDate( element ) {
+        var dateFormat = "yyyy-mm-dd";
       var date;
       try {
         date = $.datepicker.parseDate( dateFormat, element.value );
