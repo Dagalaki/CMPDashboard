@@ -67,7 +67,8 @@ ON all_users.user_id = edited_users.user_id";
 			];
 
 			echo json_encode($ret);
-exit();
+			exit();
+
 	}else if($mode== "refused"){
 
 /* 
@@ -82,10 +83,6 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 
 
 	}
-
-
-	
-
 	if($conn) $conn->close();
 
 ?>
