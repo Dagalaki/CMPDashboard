@@ -269,7 +269,7 @@
           defaultDate: "+1w",
           changeMonth: true,
           numberOfMonths: 3,
-          dateFormat: "yyyy-mm-dd"
+          dateFormat: "yy-mm-dd"
         })
         .on( "change", function() {
           to.datepicker( "option", "minDate", getDate( this ) );
@@ -285,7 +285,7 @@
       });
  
     function getDate( element ) {
-        var dateFormat = "yyyy-mm-dd";
+        var dateFormat = "yy-mm-dd";
       var date;
       try {
         date = $.datepicker.parseDate( dateFormat, element.value );
