@@ -131,7 +131,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 
 			$ret = [
 			    'labels' => $labels,
-			    'pr_data' => $data
+			    'r_data' => $data
 			];
 
 			echo json_encode($ret);
@@ -159,7 +159,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 
 			$ret = [
 			    'labels' => $labels,
-			    'pr_data' => $data
+			    'a_data' => $data
 			];
 
 			echo json_encode($ret);
