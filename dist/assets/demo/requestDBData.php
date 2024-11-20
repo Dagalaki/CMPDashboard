@@ -7,8 +7,9 @@ header("Content-Type: application/json");
 	$conn = null;
 
 	$action=$_GET["action"];
-	$vendorlist= $_GET["vendorlist"];
-	$vendorsTotal= 41;
+	$tableName = $_GET["table"];
+	$selected = $_GET["selected"];
+	$temp = explode(",", $selected);
 	$from = $_GET["from"];
 	$to=$_GET["to"];
 
@@ -21,7 +22,7 @@ header("Content-Type: application/json");
 	}
 
 	if($action == "getOverallStats"){
-		$tableName = $_GET["table"];
+		
 		$query = "SELECT consent_date, total, partially_accepted_percentage, accepted_percentage, rejected_percentage FROM ".$tableName." WHERE consent_date BETWEEN '".$_GET["from"]."' AND '".$_GET["to"]."' ORDER BY consent_date";
 		$result = $conn->query($query);
 		$labels = [];
@@ -75,8 +76,9 @@ ON all_users.user_id = edited_users.user_id";
 
 	}else if($action == "partially_accepted"){
 
-		$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS partially_accepted_percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (".$vendorlist.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) < ".$vendorsTotal.") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
-
+		$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS partially_accepted_percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (".$selected.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) < ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
+echo $query ;
+exit();
 			$result = $conn->query($query);
 
 			
