@@ -120,7 +120,7 @@ function getSelectedValues(elemName){
      return selectedValues;
 }
 
-function processRequestToFeedCharts(url){
+function processRequestToFeedChart(url){
     createHttpRequest(url, function(ret){
         console.log(ret);
             var d = JSON.parse(ret);
