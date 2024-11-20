@@ -127,19 +127,21 @@ var url = null;
 //alert(selCase);
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
+	selectedValues = selectedValues.join('", "');
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
         if(document.getElementById("vendor").value == "0"){
             url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=VendorConsentStatistics&from="+from+"&to="+to;
-        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
         
     }else if (selCase == "purposestats"){
         var selectedValues = getSelectedValues("purpose");
+	selectedValues = selectedValues.join('", "');
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
         if(document.getElementById("purpose").value == "0"){
             url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=PurposeConsentStatistics&from="+from+"&to="+to;
-        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
         
     }
     //alert(url);
