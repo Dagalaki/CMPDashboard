@@ -1,4 +1,13 @@
 <?php
+
+if(isset($_GET["action"]) && $_GET["action"] == "vendors"){
+    $allowedVendorsUrl = "http://smarttv.anixa.tv/cmp2.2/src/vendorsDE.json";
+    $list = file_get_contents($allowedVendorsUrl);
+    return $list;
+
+    exit();
+}
+
 // Fetch the content of the vendor list JSON file
 $vendorListUrl = 'https://vendor-list.consensu.org/v3/vendor-list.json';
 $translationDEUrl = "https://vendor-list.consensu.org/v3/purposes-de.json";
