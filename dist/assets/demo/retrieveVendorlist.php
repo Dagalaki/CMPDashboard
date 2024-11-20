@@ -3,7 +3,7 @@
 if(isset($_GET["action"]) && $_GET["action"] == "vendors"){
     $allowedVendorsUrl = "http://smarttv.anixa.tv/cmp2.2/src/vendorsDE.json";
     $list = file_get_contents($allowedVendorsUrl);
-    return $list;
+    echo $list;
 
     exit();
 }

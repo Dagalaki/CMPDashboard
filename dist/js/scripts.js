@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
-   // populateVendorSelect();
+    populateVendorSelect();
     populatePurposeSelect();
 
 });
