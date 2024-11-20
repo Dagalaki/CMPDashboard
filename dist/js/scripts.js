@@ -23,6 +23,9 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     }
 
+   // populateVendorSelect();
+    populatePurposeSelect();
+
 });
 
 
@@ -68,6 +71,27 @@ function createHttpRequest(url, callback, options) {
         req = null;
     }
     return req;
+}
+
+/*function populateVendorSelect(){
+    var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=vendors;
+    createHttpRequest(url, function(ret){
+        var d = JSON.parse(ret);
+        var vendors = ;
+    });
+}*/
+
+function populatePurposeSelect(){
+    var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=purposes";
+    createHttpRequest(url, function(ret){
+        var d = JSON.parse(ret);
+        var htmlStr = "";
+        var purposes = d.purposes;
+        for(var i =0; i< purposes.length; i++){
+            htmlStr += "<option value='"+i+"'>" + purposes[i]["name"] + "</option>";
+        }
+        document.getElementById("purpose").innerHTML += htmlStr;
+    });
 }
 
 function getAllowedVendorList(){

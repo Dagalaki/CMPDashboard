@@ -102,27 +102,54 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Filters:</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                               
-
-<div class="custom-select" style="width:200px;">
-  <select id="vendor">
-    <option value="0">Select vendor:</option>
-    <option value="40">Active Agent</option>
-  </select>
-</div>
-                            </div>
-                            <div class="col-xl-3 col-md-6" style="width:65%">
-
-                                <label for="from">From</label>
+                        <div class="row" id="filters">
+<div class="custom-select" style="">
+  <table>
+    <tr><td colspan="3">
+        <label for="from">From</label>
                                 <input type="text" id="from" name="from">
                                 <label for="to">to</label>
                                 <input type="text" id="to" name="to">
 
+    </td>
+<td></td>
+</tr>
+    <tr>
+        <td><input type="radio"/></td>
+        <td>
+            <select id="vendor">
+                <option value="0">All vendors(default):</option>
+                <option value="40">Active Agent</option>
+              </select>
+        </td>
+        <td><button >+</button></td>
+    </tr>
+    <tr>
+          <td><input type="radio"/></td>
+        <td>
+            <select id="purpose">
+                <option value="0">All purposes(default):</option>
+                <option value="1">Blablabla</option>
+              </select>
+        </td>
+        <td><button >+</button></td>
+    </tr>
+    <tr><td colspan="3" id="sel-vendors"></td></tr>
+    <tr><td colspan = "3"><button id="load-btn" onclick="populateCharts();">LOAD</button></td></tr>
+</table>
+</div>
+</div>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                               
+                            </div>
+                            <div class="col-xl-3 col-md-6" style="width:65%">
+
+                                
+
                             </div>
                             <div class="col-xl-3 col-md-6">
-                                <button id="load-btn" onclick="populateCharts();">LOAD</button>
+                                
                             </div>
                         </div>
                         <div class="row" style="height:30px"></div>
