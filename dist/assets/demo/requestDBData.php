@@ -55,9 +55,30 @@ header("Content-Type: application/json");
 	if($action == "total"){
 		//accepted
 		$fieldName = ($tableName == "VendorConsents")? "vendor_id" : "purpose_id";
-		$query = "SELECT COUNT(DISTINCT edited_users.user_id) AS total_users_edited_consent FROM (SELECT DISTINCT user_id FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users JOIN (SELECT user_id FROM ".$tableName." WHERE vendor_id IN (".$selected.") AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY user_id, ".$fieldName." HAVING COUNT(*) >= 1) AS edited_users ON all_users.user_id = edited_users.user_id";
+		$query = "SELECT DATE(all_users.consent_date) AS consent_date,COUNT(DISTINCT edited_users.user_id) AS total_users_edited_consent FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE vendor_id IN (".$selected.") AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY user_id, vendor_id, DATE(timestamp) HAVING COUNT(*) >= 1) AS edited_users ON all_users.user_id = edited_users.user_id AND all_users.consent_date = edited_users.consent_date GROUP BY DATE(edited_users.consent_date) ORDER BY edited_users.consent_date";
 
-		echo $query;
+		
+		$result = $conn->query($query);
+
+			if ($result === false) {
+			    die("(".$q.")Error in query execution: " . $conn->error);
+			}
+
+			$labels = [];
+			$data = [];
+
+			while ($row = $result->fetch_assoc()) {
+			    $labels[] = $row['consent_date']; 
+			    $data[] = (float) $row['total_users_edited_consent'];
+			}
+
+			$ret = [
+			    'labels' => $labels,
+			    'total' => $data
+			];
+
+			echo json_encode($ret);
+
 		exit();
 
 	}else if($action == "partially_accepted"){
