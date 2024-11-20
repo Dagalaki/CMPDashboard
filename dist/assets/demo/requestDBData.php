@@ -20,7 +20,7 @@ header("Content-Type: application/json");
 	}
 
 	if($action == "getOverallStats_Vendors"){
-		$query = "SELECT consent_date, total, partially_accepted_percentage, accepted_percentage, rejected_percentage FROM VendorConsentStatistics WHERE consent_date BETWEEN '2024-10-19' AND '2024-11-19' ORDER BY consent_date";
+		$query = "SELECT consent_date, total, partially_accepted_percentage, accepted_percentage, rejected_percentage FROM VendorConsentStatistics WHERE consent_date BETWEEN '".$_GET["from"]."' AND '".$_GET["to"]."' ORDER BY consent_date";
 		$result = $conn->query($query);
 		$labels = [];
 		$pr_data = [];
