@@ -105,7 +105,7 @@
                         <div class="row" id="filters">
 <div class="custom-select" style="">
   <table>
-    <tr><td colspan="3">
+    <tr><td>
         <label for="from">From</label>
                                 <input type="text" id="from" name="from">
                                 <label for="to">to</label>
@@ -115,26 +115,25 @@
 <td></td>
 </tr>
     <tr>
-        <td><input type="radio"/></td>
+        
         <td>
             <select id="vendor" multiple>
                 <option value="0">All vendors(default):</option>
                 <option value="40">Active Agent</option>
               </select>
         </td>
-        <td><button >+</button></td>
     </tr>
     <tr>
-          <td><input type="radio"/></td>
+         
         <td>
             <select id="purpose" multiple>
                 <option value="0">All purposes(default):</option>
               </select>
         </td>
-        <td><button >+</button></td>
+        
     </tr>
-    <tr><td colspan="3" id="sel-vendors"></td></tr>
-    <tr><td colspan = "3"><button id="load-btn" onclick="populateCharts();">LOAD</button></td></tr>
+    <tr><td  id="sel-vendors"></td></tr>
+    <tr><td><button id="load-btn" onclick="populateCharts("vendorstats");">Load Vendor Statistics</button><button id="load-btn" onclick="populateCharts("purposestats");">Load Purposes Statistics</button></td></tr>
 </table>
 </div>
 </div>

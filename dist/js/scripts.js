@@ -114,21 +114,37 @@ function getAllowedVendorList(){
     return allowedVendors;
 }
 
-function populateCharts(){
+function getSelectedValues(elemName){
+     var selectElement = document.getElementById(elemName).value;
+     if(document.getElementById("vendor").value == "0"){
+        var selectedOptions = Array.from(selectElement.options);
+     }else{
+        var selectedOptions = Array.from(selectElement.selectedOptions);
+     }
+     var selectedValues = selectedOptions.map(function(option) {
+                return option.value;
+              });
+     return selectedValues;
+}
+
+function populateCharts(selCase){
     var from = document.getElementById("from").value;
     var to = document.getElementById("to").value;
-    if(document.getElementById("vendor").value == "0"){
-        allowedVendors = getAllowedVendorList();
-    }else allowedVendors = document.getElementById("vendor").value;
+    if(selCase == "vendorstats"){
+        getSelectedValues("vendor");
+        if(document.getElementById("vendor").value){
+            url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=VendorConsentStatistics&from="+from+"&to="+to;
+        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+        
+    }else if (selCase == "purposestats"){
+        getSelectedValues("purpose");
+        if(document.getElementById("vendor").value){
+            url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=PurposeConsentStatistics&from="+from+"&to="+to;
+        }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+        
+    }
+    
 
-    /*var pr_labels = ["01/04/2021", "03/04/2021", "05/04/2021", "07/04/2021", "09/04/2021", "11/04/2021", "13/04/2021", "15/04/2021", "17/04/2021", "19/04/2021", "21/04/2021", "23/04/2021", "25/04/2021", "27/04/2021", "29/04/2021", "31/04/2021", "02/05/2021", "04/05/2021",  "06/05/2021", "08/05/2021", "10/05/2021", "12/05/2021"];
-    var pr_data = [30, 34, 60, 78, 54, 56, 45, 32, 55, 99, 89, 93, 43, 54, 56, 45, 32, 55, 99, 89, 93, 43];
-    createPartiallyRefused(pr_labels, pr_data);
-    */
-
-    if(document.getElementById("vendor").value){
-        url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats_Vendors&from="+from+"&to="+to;
-    }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
     createHttpRequest(url, function(ret){
         console.log(ret);
             var d = JSON.parse(ret);
