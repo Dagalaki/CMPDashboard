@@ -41,9 +41,9 @@ header("Content-Type: application/json");
 
 		$response = [
 		    "labels" => $labels,
-		    "partially_accepted" => $pr_data,
-		    "accepted" => $a_data,
-		    "rejected" => $r_data,
+		    "pr_data" => $pr_data,
+		    "a_data" => $a_data,
+		    "r_data" => $r_data,
 		    "total" => $total
 		];
 		echo json_encode($response);
