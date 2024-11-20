@@ -87,9 +87,9 @@ function populateCharts(){
     createPartiallyRefused(pr_labels, pr_data);
     */
 
-    if(document.getElementById("vendor").value){
+    /*if(document.getElementById("vendor").value){
         url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats_Vendors&from="+from+"&to="+to;
-    }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+    }else*/ url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
     createHttpRequest(url, function(ret){
         console.log(ret);
             var d = JSON.parse(ret);

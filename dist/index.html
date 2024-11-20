@@ -263,10 +263,30 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script>
   $( function() {
+
+    var today = new Date();
+    
+    // Set the default date for "from" to 1 month before today
+    var oneMonthAgo = new Date();
+    oneMonthAgo.setMonth(today.getMonth() - 1);
+    
+    // Format dates to "yy-mm-dd"
+    var formatDate = function(date) {
+        var d = new Date(date);
+        var month = d.getMonth() + 1; // months are zero-based
+        var day = d.getDate();
+        var year = d.getFullYear();
+        return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    };
+
+    // Set default values for "from" and "to"
+    $("#from").val(formatDate(oneMonthAgo));
+    $("#to").val(formatDate(today));
+
     var dateFormat = "yy-mm-dd",
       from = $( "#from" )
         .datepicker({
-          defaultDate: "+1w",
+          defaultDate: "-1m", // Default date to 1 month before today
           changeMonth: true,
           numberOfMonths: 3,
           dateFormat: "yy-mm-dd"
@@ -275,7 +295,7 @@
           to.datepicker( "option", "minDate", getDate( this ) );
         }),
       to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
+        defaultDate: "0", // Default date to today
         changeMonth: true,
         numberOfMonths: 3,
         dateFormat: "yy-mm-dd"
@@ -295,6 +315,9 @@
  
       return date;
     }
+
+populateCharts();
+
   } );
   </script>
         <script>
