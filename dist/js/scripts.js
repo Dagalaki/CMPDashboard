@@ -86,9 +86,9 @@ function populatePurposeSelect(){
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
         var htmlStr = "";
-        var purposes = d.purposes;
-        for(var i =0; i< purposes.length; i++){
-            htmlStr += "<option value='"+i+"'>" + purposes[i]["name"] + "</option>";
+        var purposes = d["purposes"];
+        for(var i =0; i< Object.keys(purposes).length; i++){
+            htmlStr += "<option value='"+(i+1)+"'>" + purposes[i+1].name + "</option>";
         }
         document.getElementById("purpose").innerHTML += htmlStr;
     });

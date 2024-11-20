@@ -43,7 +43,7 @@
 	$testData = generateTestData('2024-10-19', '2024-11-19');
 
 
-	$stmt = $conn->prepare("INSERT INTO VendorConsentStatistics 
+	$stmt = $conn->prepare("INSERT INTO PurposeConsentStatistics 
     (consent_date, partially_accepted_percentage, accepted_percentage, rejected_percentage, total) 
     VALUES (?, ?, ?, ?, ?)");
 
