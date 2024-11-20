@@ -105,7 +105,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 
 			while ($row = $result->fetch_assoc()) {
 			    $labels[] = $row['consent_date']; 
-			    $data[] = (float) $row['partially_accepted_percentage'];
+			    $data[] = (float) $row['rejected_percentage'];
 			}
 
 			$ret = [
@@ -133,7 +133,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 
 			while ($row = $result->fetch_assoc()) {
 			    $labels[] = $row['consent_date']; 
-			    $data[] = (float) $row['partially_accepted_percentage'];
+			    $data[] = (float) $row['accepted_percentage'];
 			}
 
 			$ret = [

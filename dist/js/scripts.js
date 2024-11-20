@@ -154,7 +154,7 @@ var url = null;
 //alert(selCase);
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
-	selectedValues = selectedValues.join('", "');
+	selectedValues = selectedValues.join(",");
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
         if(document.getElementById("vendor").value == "0"){
@@ -171,7 +171,7 @@ var url = null;
         }
     }else if (selCase == "purposestats"){
         var selectedValues = getSelectedValues("purpose");
-	selectedValues = selectedValues.join('", "');
+	selectedValues = selectedValues.join(",");
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
         if(document.getElementById("purpose").value == "0"){
