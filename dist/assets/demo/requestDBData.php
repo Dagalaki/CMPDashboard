@@ -33,7 +33,7 @@ header("Content-Type: application/json");
 		        $pr_data[] = (int) $row['partially_accepted_percentage'];
 		        $a_data[] = (int) $row['accepted_percentage'];
 		        $r_data[] = (int) $row['rejected_percentage'];
-		        $total[] = (int) $row['total_users_edited_consent'];
+		        $total[] = (int) $row['total'];
 		    }
 		} else {
 		    echo "No results found for the given date range.";
