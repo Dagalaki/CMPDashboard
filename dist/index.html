@@ -118,8 +118,7 @@
         
         <td>
             <select id="vendor" multiple>
-                <option value="0">All vendors(default):</option>
-                <option value="40">Active Agent</option>
+                <option value="0" selected>All vendors(default):</option>
               </select>
         </td>
     </tr>
@@ -127,13 +126,13 @@
          
         <td>
             <select id="purpose" multiple>
-                <option value="0">All purposes(default):</option>
+                <option value="0" selected>All purposes(default):</option>
               </select>
         </td>
         
     </tr>
     <tr><td  id="sel-vendors"></td></tr>
-    <tr><td><button id="load-btn" onclick="populateCharts("vendorstats");">Load Vendor Statistics</button><button id="load-btn" onclick="populateCharts("purposestats");">Load Purposes Statistics</button></td></tr>
+    <tr><td><button id="load-btn" onclick="populateCharts('vendorstats');">Load Vendor Statistics</button><button id="load-btn" onclick="populateCharts('purposestats');">Load Purposes Statistics</button></td></tr>
 </table>
 </div>
 </div>
@@ -341,7 +340,7 @@
       return date;
     }
 
-populateCharts();
+populateCharts("vendorstats");
 
   } );
   </script>
