@@ -86,12 +86,32 @@ function populateCharts(){
     var pr_data = [30, 34, 60, 78, 54, 56, 45, 32, 55, 99, 89, 93, 43, 54, 56, 45, 32, 55, 99, 89, 93, 43];
     createPartiallyRefused(pr_labels, pr_data);
     */
-    url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
+
+    if(document.getElementById("vendor").value){
+        url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats_Vendors&from="+from+"&to="+to;
+    }else url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?mode=partially_accepted&vendorlist="+allowedVendors+"&from="+from+"&to="+to;
     createHttpRequest(url, function(ret){
         console.log(ret);
             var d = JSON.parse(ret);
-            pr_labels = d.labels;
-            pr_data = d.data;
-            createPartiallyRefused(pr_labels, pr_data);
+            labels = d.labels;
+            if(d.pr_data) {
+                pr_data = d.pr_data;
+                createPartiallyRefusedChart(labels, pr_data);
+            }
+            if(d.a_data) {
+                a_data = d.a_data;
+                createAcceptedChart(labels, a_data);
+            }
+            if(d.r_data) {
+                r_data = d.r_data;
+                createRefusedChart(labels, r_data);
+            }
+
+            if(d.total) {
+                total = d.total;
+                createTotalsChart(labels, total);
+            }
+
+
              });
 }

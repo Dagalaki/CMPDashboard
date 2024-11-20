@@ -4,7 +4,7 @@
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
-function createPartiallyRefused(pr_labels, pr_data){
+function createPartiallyRefusedChart(pr_labels, pr_data){
 // Area Chart Example
 var ctx = document.getElementById("partiallyRefusedChart");
 var myLineChart = new Chart(ctx, {
