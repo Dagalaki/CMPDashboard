@@ -89,6 +89,17 @@ function populatePurposeSelect(){
 }
 
 function populateVendorSelect(){
+
+    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
+        var data = JSON.parse(ret);
+        var str = "";
+        data.forEach(item => {
+            htmlStr += "<option value='"+item.TCFv2_ID+"'>" + item.Vendor + "</option>";
+       
+         });
+    document.getElementById("vendor").innerHTML += htmlStr;        
+  });
+
     var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=vendors";
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
