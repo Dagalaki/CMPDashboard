@@ -21,6 +21,39 @@ header("Content-Type: application/json");
 	  die("Connection failed: " . $conn->connect_error);
 	}
 
+	if($action == "deleteVendor"){
+		
+    if (isset($_GET["TCFv2_ID"])) {
+        $tcfv2_id = intval($_GET["TCFv2_ID"]); 
+
+        $sql = "DELETE FROM AllowedVendors WHERE TCFv2_ID = ?";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            
+            $stmt->bind_param("i", $tcfv2_id);
+
+            if ($stmt->execute()) {
+                echo json_encode(["status" => "success", "message" => "Vendor deleted successfully."]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Failed to delete vendor."]);
+            }
+
+           
+            $stmt->close();
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to prepare the statement."]);
+        }
+
+       
+        $conn->close();
+	    } else {
+	        echo json_encode(["status" => "error", "message" => "Missing TCFv2_ID parameter."]);
+	    }
+    exit();
+
+	}
+
 	if($action == "getAllowedVendors"){
 
 		$sql = "SELECT allowed_id, TCFv2_ID, Vendor FROM AllowedVendors";

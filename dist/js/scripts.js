@@ -192,12 +192,34 @@ var url = null;
     processRequestToFeedChart(url);
 }
 
+function deleteVendor(tcfID){
+   
+   
+    const userConfirmed = confirm(`Are you sure you want to delete the vendor with TCFv2.2 ID  ${tcfID}?`);
+
+    if (userConfirmed) {
+        console.log(`Vendor "${tcfID}" has been deleted.`);
+        sendDeleteRequest(tcfID);
+    } else {
+        // User clicked "Cancel"
+        console.log(`Deletion of vendor "${tcfID}" was canceled.`);
+    }
+}
+
+function sendDeleteRequest(tcfID){
+    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=deleteVendor&TCFv2_ID=" + tcfID, function(ret){
+        var d = JSON.parse(ret);
+        if(d.status == "success") loadAllowedVendors();
+        else if(d.status == "error") alert(d.message);
+    });
+}
+
 function loadAllowedVendors(){
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
         var str = "";
         data.forEach(item => {
-            str += "<tr><td>"+item.TCFv2_ID+"</td><td>"+item.Vendor+"</td></tr>";
+            str += "<tr><td>"+item.TCFv2_ID+"</td><td>"+item.Vendor+"</td><td><button onClick='deleteVendor("+item.TCFv2_ID+");'>Remove</button></td></tr>";
         });
         document.getElementById("tbodyOfAllowedVendors").innerHTML= str;
     });
