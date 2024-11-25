@@ -21,6 +21,34 @@ header("Content-Type: application/json");
 	  die("Connection failed: " . $conn->connect_error);
 	}
 
+	
+if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
+    
+    if (isset($_GET['TCFv2_ID'], $_GET['vendorName']) && !empty($_GET['TCFv2_ID']) && !empty($_GET['vendorName'])) {
+        $TCFv2_ID = $_GET['TCFv2_ID'];
+        $vendorName = $_GET['vendorName'];
+
+        
+        $sql = "INSERT INTO AllowedVendors (TCFv2_ID, Vendor) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ss", $TCFv2_ID, $vendorName);
+            if ($stmt->execute()) {
+                echo json_encode(["status" => "success", "message" => "Vendor added successfully."]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Failed to add vendor."]);
+            }
+            $stmt->close(); 
+        } else {
+            echo json_encode(["status" => "error", "message" => "Failed to prepare SQL statement."]);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "Invalid or missing parameters."]);
+    }
+} 
+
+
 	if($action == "deleteVendor"){
 		
     if (isset($_GET["TCFv2_ID"])) {

@@ -206,8 +206,40 @@ function deleteVendor(tcfID){
     }
 }
 
+function clearPrompt(input) {
+    // Clear the prompt text when the input is focused
+    if (input.value === "Type TCFv2.2 ID") {
+        input.value = ""; // Clear the input
+        input.style.color = "black"; // Change text color to normal
+    }
+    if (input.value === "Type Vendor name") {
+        input.value = ""; // Clear the input
+        input.style.color = "black"; // Change text color to normal
+    }
+}
+
+function restorePrompt(input, id) {
+   if (input.value.trim() === "") {
+       if(id == "tcfId") input.value = "Type TCFv2.2 ID";
+       else if(id == "vendorName") input.value = "Type Vendor name";
+        input.style.color = "gray"; 
+    }
+}
+
 function sendDeleteRequest(tcfID){
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=deleteVendor&TCFv2_ID=" + tcfID, function(ret){
+        var d = JSON.parse(ret);
+        if(d.status == "success") loadAllowedVendors();
+        else if(d.status == "error") alert(d.message);
+    });
+}
+
+function addNewVendor(){
+    var tcfId = document.getElementById("tcfId").value;
+    var vendorName = document.getElementById("vendorName").value;
+    var url  = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=addVendor&TCFv2_ID=" + tcfId+"&vendorName=" + vendorName;
+    alert(url);
+    createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
         if(d.status == "success") loadAllowedVendors();
         else if(d.status == "error") alert(d.message);
