@@ -6,12 +6,12 @@ header("Content-Type: application/json");
 	$db = "cmp";
 	$conn = null;
 
-	$action=$_GET["action"];
-	$tableName = $_GET["table"];
-	$selected = $_GET["selected"];
+	$action=isset($_GET["action"])? $_GET["action"] : null;
+	$tableName = isset($_GET["table"])? $_GET["table"] : null;
+	$selected = isset($_GET["selected"])? $_GET["selected"] : null;
 	$temp = explode(",", $selected);
-	$from = $_GET["from"];
-	$to=$_GET["to"];
+	$from = isset($_GET["from"])? $_GET["from"] : null;
+	$to=isset($_GET["to"])? $_GET["to"] : null;
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, $db);
@@ -19,6 +19,29 @@ header("Content-Type: application/json");
 	// Check connection
 	if ($conn->connect_error) {
 	  die("Connection failed: " . $conn->connect_error);
+	}
+
+	if($action == "getAllowedVendors"){
+
+		$sql = "SELECT allowed_id, TCFv2_ID, Vendor FROM AllowedVendors";
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+   		 $vendors = array();
+
+    	while ($row = $result->fetch_assoc()) {
+        	$vendors[] = $row;
+    	}
+
+    	header('Content-Type: application/json');
+    	echo json_encode($vendors, JSON_PRETTY_PRINT);
+	} else {
+    
+    	echo json_encode(array("message" => "No data found"));
+	}
+		$conn->close();
+
+		exit();
 	}
 
 	if($action == "getOverallStats"){

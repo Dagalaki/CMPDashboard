@@ -191,3 +191,9 @@ var url = null;
     //alert(url);
     processRequestToFeedChart(url);
 }
+
+function loadAllowedVendors(){
+    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
+
+    });
+}
