@@ -194,6 +194,11 @@ var url = null;
 
 function loadAllowedVendors(){
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
-
+        var data = JSON.parse(ret);
+        var str = "";
+        data.forEach(item => {
+            str += "<tr><td>"+item.TCFv2_ID+"</td><td>"+item.Vendor+"</td></tr>";
+        });
+        document.getElementById("tbodyOfAllowedVendors").innerHTML= str;
     });
 }
