@@ -92,7 +92,8 @@ function populateVendorSelect(){
 
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
-        var str = "";
+        
+        var htmlStr = "";
         data.forEach(item => {
             htmlStr += "<option value='"+item.TCFv2_ID+"'>" + item.Vendor + "</option>";
        
