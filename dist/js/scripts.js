@@ -238,7 +238,6 @@ function addNewVendor(){
     var tcfId = document.getElementById("tcfId").value;
     var vendorName = document.getElementById("vendorName").value;
     var url  = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=addVendor&TCFv2_ID=" + tcfId+"&vendorName=" + vendorName;
-    alert(url);
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
         if(d.status == "success") loadAllowedVendors();

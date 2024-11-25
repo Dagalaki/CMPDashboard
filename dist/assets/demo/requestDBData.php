@@ -84,7 +84,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 
 	if($action == "getAllowedVendors"){
 
-		$sql = "SELECT allowed_id, TCFv2_ID, Vendor FROM AllowedVendors";
+		$sql = "SELECT allowed_id, TCFv2_ID, Vendor FROM AllowedVendors ORDER BY allowed_id DESC";
 		$result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
