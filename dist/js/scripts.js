@@ -100,17 +100,6 @@ function populateVendorSelect(){
     document.getElementById("vendor").innerHTML += htmlStr;        
   });
 
-    var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=vendors";
-    createHttpRequest(url, function(ret){
-        var d = JSON.parse(ret);
-        var htmlStr = "";
-        var vendors = d["vendors"];
-        for(var i =0; i< Object.keys(vendors).length; i++){
-            htmlStr += "<option value='"+vendors[i].TCFv2_ID+"'>" + vendors[i].Vendor + "</option>";
-        }
-        
-        document.getElementById("vendor").innerHTML += htmlStr;
-    });
 }
 
 function getAllowedVendorList(){
