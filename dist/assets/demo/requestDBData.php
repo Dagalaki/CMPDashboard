@@ -139,7 +139,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 	if($action == "total"){
 		//accepted
 		$fieldName = ($tableName == "VendorConsents")? "vendor_id" : "purpose_id";
-		$query = "SELECT DATE(all_users.consent_date) AS consent_date,COUNT(DISTINCT edited_users.user_id) AS total_users_edited_consent FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE vendor_id IN (".$selected.") AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY user_id, vendor_id, DATE(timestamp) HAVING COUNT(*) >= 1) AS edited_users ON all_users.user_id = edited_users.user_id AND all_users.consent_date = edited_users.consent_date GROUP BY DATE(edited_users.consent_date) ORDER BY edited_users.consent_date";
+		$query = "SELECT DATE(all_users.consent_date) AS consent_date,COUNT(DISTINCT edited_users.user_id) AS total_users_edited_consent FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE ".$fieldName." IN (".$selected.") AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY user_id, vendor_id, DATE(timestamp) HAVING COUNT(*) >= 1) AS edited_users ON all_users.user_id = edited_users.user_id AND all_users.consent_date = edited_users.consent_date GROUP BY DATE(edited_users.consent_date) ORDER BY edited_users.consent_date";
 
 		
 		$result = $conn->query($query);
@@ -167,8 +167,9 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 		exit();
 
 	}else if($action == "partially_accepted"){
+		$fieldName = ($tableName == "VendorConsents")? "vendor_id" : "purpose_id";
 
-		$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS partially_accepted_percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (".$selected.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) < ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
+		$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS partially_accepted_percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE ".$fieldName." IN (".$selected.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) < ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
 			$result = $conn->query($query);
 
 			if ($result === false) {
@@ -198,9 +199,9 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 AND consent_value = 0
 ..
 HAVING COUNT(DISTINCT vendor_id) = 41)*/
+$fieldName = ($tableName == "VendorConsents")? "vendor_id" : "purpose_id";
 
-
-	$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (".$selected.") AND consent_value = 0 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) = ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
+	$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE ".$fieldName." IN (".$selected.") AND consent_value = 0 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) = ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
 			$result = $conn->query($query);
 
 			if ($result === false) {
@@ -229,7 +230,8 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 AND consent_value = 1
 ..
 HAVING COUNT(DISTINCT vendor_id) = 41)*/
-	$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM VendorConsents WHERE vendor_id IN (".$selected.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) = ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
+$fieldName = ($tableName == "VendorConsents")? "vendor_id" : "purpose_id";
+	$query = "SELECT all_users.consent_date,(COUNT(DISTINCT all_vendors_accepted.user_id) / COUNT(DISTINCT all_users.user_id)) * 100 AS percentage FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users LEFT JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE ".$fieldName." IN (".$selected.") AND consent_value = 1 AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY DATE(timestamp), user_id HAVING COUNT(DISTINCT vendor_id) = ".count($temp).") AS all_vendors_accepted ON all_users.user_id = all_vendors_accepted.user_id AND all_users.consent_date = all_vendors_accepted.consent_date GROUP BY all_users.consent_date ORDER BY all_users.consent_date";
 			$result = $conn->query($query);
 
 			if ($result === false) {
