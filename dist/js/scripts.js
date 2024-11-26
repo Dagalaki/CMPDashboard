@@ -25,7 +25,8 @@ window.addEventListener('DOMContentLoaded', event => {
 
     populateVendorSelect();
     populatePurposeSelect();
-    loadAllowedVendors();
+   
+    setTimeout(function(){loadAllowedVendors();}, 2000);
 
 });
 
