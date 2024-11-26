@@ -124,6 +124,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 h1, .h1 {
   font-size: calc(1.375rem + 1.5vw);
 }
+
+h4{
+  color:rgb(227, 146, 27);
+}
 @media (min-width: 1200px) {
   h1, .h1 {
     font-size: 2.5rem;
@@ -348,6 +352,7 @@ button {
 background-color: #c4d9e0;
 text-transform: uppercase;
 padding: 5px 10px;
+margin-right:20px!important;
 }
 
 button:focus:not(:focus-visible) {
@@ -1451,7 +1456,8 @@ progress {
   }
   .col-xl-3 {
     flex: 0 0 auto;
-    width: 25%;
+    width: 20%;
+    text-align: center
   }
   .col-xl-4 {
     flex: 0 0 auto;
@@ -7631,6 +7637,7 @@ textarea.form-control-lg {
 
 .mt-4 {
   margin-top: 1.5rem !important;
+  color:#4a4ad8;
 }
 
 .mt-5 {
