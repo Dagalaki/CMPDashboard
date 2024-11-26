@@ -6,6 +6,10 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 function createPartiallyRefusedChart(pr_labels, pr_data){
 // Area Chart Example
+
+$('#partiallyRefusedChart').remove(); // this is my <canvas> element
+$('#partiallyCont').append('<canvas id="partiallyRefusedChart"  width="100%" height="40"><canvas>');
+
 var ctx = document.getElementById("partiallyRefusedChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',

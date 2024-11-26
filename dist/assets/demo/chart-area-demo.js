@@ -5,6 +5,9 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // Area Chart Example
 function createTotalsChart(labels, data){
 
+$('#consentsChart').remove(); // this is my <canvas> element
+$('#totalCont').append('<canvas id="consentsChart"  width="100%" height="40"><canvas>');
+
 var ctx = document.getElementById("consentsChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',

@@ -5,6 +5,9 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // Area Chart Example
 function createRefusedChart(labels, data){
 
+$('#refusedChart').remove(); // this is my <canvas> element
+$('#refusedCont').append('<canvas id="refusedChart"  width="100%" height="40"><canvas>');
+
 var ctx = document.getElementById("refusedChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
