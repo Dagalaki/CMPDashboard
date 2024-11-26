@@ -174,7 +174,11 @@ var url = null;
             processRequestToFeedChart(urlPartiallyAccepted);
         }
     }else if (selCase == "purposestats"){
+        var caseOnePurpose = false;
         var selectedValues = getSelectedValues("purpose");
+        if(selectedValues.length == 1 && document.getElementById("purpose").value != "0"){
+            caseOnePurpose = true;
+        }
 	selectedValues = selectedValues.join(",");
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
@@ -187,8 +191,13 @@ var url = null;
             processRequestToFeedChart(urlAccepted);
             urlRefused = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=refused&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlRefused);
-            urlPartiallyAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
-            processRequestToFeedChart(urlPartiallyAccepted);
+           if(!caseOnePurpose){
+                document.getElementById("partiallyColumn").style.display="block";
+                urlPartiallyAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+                processRequestToFeedChart(urlPartiallyAccepted);
+            }else {
+                document.getElementById("partiallyColumn").style.display="none";
+            }
             return ;
         }
     }
