@@ -179,6 +179,8 @@ var url = null;
         if(selectedValues.length == 1 && document.getElementById("purpose").value != "0"){
             caseOnePurpose = true;
         }
+        console.log(selectedValues.length);
+        console.log(document.getElementById("purpose"));
 	selectedValues = selectedValues.join(",");
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
