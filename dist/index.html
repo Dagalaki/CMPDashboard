@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -121,7 +122,7 @@
     <tr>
         
         <td>
-            <select id="vendor" multiple>
+            <select id="vendor" multiple searchable>
                 <option value="0" selected>All vendors(default):</option>
               </select>
         </td>
@@ -129,7 +130,7 @@
     <tr>
          
         <td>
-            <select id="purpose" multiple>
+            <select id="purpose" multiple searchable>
                 <option value="0" selected>All purposes(default):</option>
               </select>
         </td>
@@ -289,7 +290,21 @@
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="/CMPDashboard/dist/customize-multiple-select/css/amsify.select.css" />
+        <!--script src="https://cdn.jsdelivr.net/npm/jquery-slim@3.0.0/dist/jquery.slim.min.js"></script-->
+        <script src="/CMPDashboard/dist/customize-multiple-select/js/jquery.amsifyselect.js"></script>
         <script>
+
+$(document).ready(function () {
+            $('#vendor').amsifySelect({
+                type: 'amsify'
+            });
+            $('#purpose').amsifySelect({
+                type: 'amsify'
+            });
+        });
+
   $( function() {
 
     var today = new Date();
@@ -306,6 +321,14 @@
         var year = d.getFullYear();
         return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
     };
+
+   
+
+/*
+    $('select').amsifySelect({
+      searchable :true
+    });*/
+
 
     // Set default values for "from" and "to"
     $("#from").val(formatDate(oneMonthAgo));
