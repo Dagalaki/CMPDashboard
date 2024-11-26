@@ -88,6 +88,9 @@ function populatePurposeSelect(){
         }
         
         document.getElementById("purpose").innerHTML += htmlStr;
+        $('#vendor').amsifySelect({
+                type: 'amsify'
+            });
     });
 }
 
@@ -101,7 +104,10 @@ function populateVendorSelect(){
             htmlStr += "<option value='"+item.TCFv2_ID+"'>" + item.Vendor + "</option>";
        
          });
-    document.getElementById("vendor").innerHTML += htmlStr;        
+    document.getElementById("vendor").innerHTML += htmlStr;
+    $('#vendor').amsifySelect({
+                type: 'amsify'
+            });        
   });
 
 }
