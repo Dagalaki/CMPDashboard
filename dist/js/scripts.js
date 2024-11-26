@@ -90,7 +90,7 @@ function populatePurposeSelect(){
 
 function populateVendorSelect(){
 
-    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
+    createHttpRequest("https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
         
         var htmlStr = "";
@@ -159,15 +159,15 @@ var url = null;
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
         if(document.getElementById("vendor").value == "0"){
-            url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=VendorConsentStatistics&from="+from+"&to="+to;
+            url = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=VendorConsentStatistics&from="+from+"&to="+to;
         }else {
-            urlTotal = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlTotal = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlTotal);
-            urlAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=accepted&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlAccepted = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=accepted&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlAccepted);
-            urlRefused = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=refused&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlRefused = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=refused&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlRefused);
-            urlPartiallyAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlPartiallyAccepted = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlPartiallyAccepted);
         }
     }else if (selCase == "purposestats"){
@@ -176,15 +176,15 @@ var url = null;
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
         if(document.getElementById("purpose").value == "0"){
-            url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=PurposeConsentStatistics&from="+from+"&to="+to;
+            url = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=PurposeConsentStatistics&from="+from+"&to="+to;
         }else {
-            urlTotal = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlTotal = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlTotal);
-            urlAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlAccepted = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlAccepted);
-            urlRefused = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=refused&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlRefused = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=refused&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlRefused);
-            urlPartiallyAccepted = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
+            urlPartiallyAccepted = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=partially_accepted&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
             processRequestToFeedChart(urlPartiallyAccepted);
             return ;
         }
@@ -228,7 +228,7 @@ function restorePrompt(input, id) {
 }
 
 function sendDeleteRequest(tcfID){
-    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=deleteVendor&TCFv2_ID=" + tcfID, function(ret){
+    createHttpRequest("https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=deleteVendor&TCFv2_ID=" + tcfID, function(ret){
         var d = JSON.parse(ret);
         if(d.status == "success") loadAllowedVendors();
         else if(d.status == "error") alert(d.message);
@@ -238,7 +238,7 @@ function sendDeleteRequest(tcfID){
 function addNewVendor(){
     var tcfId = document.getElementById("tcfId").value;
     var vendorName = document.getElementById("vendorName").value;
-    var url  = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=addVendor&TCFv2_ID=" + tcfId+"&vendorName=" + vendorName;
+    var url  = "https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=addVendor&TCFv2_ID=" + tcfId+"&vendorName=" + vendorName;
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
         if(d.status == "success") loadAllowedVendors();
@@ -247,7 +247,7 @@ function addNewVendor(){
 }
 
 function loadAllowedVendors(){
-    createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
+    createHttpRequest("https://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
         var str = "";
         data.forEach(item => {
