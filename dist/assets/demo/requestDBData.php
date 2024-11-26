@@ -157,6 +157,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 			}
 
 			$ret = [
+				'query' => $query,
 			    'labels' => $labels,
 			    'total' => $data
 			];
@@ -183,6 +184,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 			}
 
 			$ret = [
+				'query' => $query,
 			    'labels' => $labels,
 			    'pr_data' => $data
 			];
@@ -214,6 +216,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 			}
 
 			$ret = [
+				'query' => $query,
 			    'labels' => $labels,
 			    'r_data' => $data
 			];
@@ -242,6 +245,7 @@ HAVING COUNT(DISTINCT vendor_id) = 41)*/
 			}
 
 			$ret = [
+				'query' => $query,
 			    'labels' => $labels,
 			    'a_data' => $data
 			];
