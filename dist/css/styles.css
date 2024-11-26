@@ -384,6 +384,16 @@ select {
   cursor: pointer;
 }
 
+.amsify-select-clear{
+  background-color: rgb(224, 35, 35);
+  color: white;
+}
+
+.amsify-select-close{
+  background-color: rgb(60, 128, 204);
+color: white;
+}
+
 select {
   word-wrap: normal;
 }
