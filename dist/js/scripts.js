@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     populateVendorSelect();
     populatePurposeSelect();
+    loadAllowedVendors();
 
 });
 
@@ -248,6 +249,7 @@ function addNewVendor(){
 }
 
 function loadAllowedVendors(){
+    if(!document.getElementById("tbodyOfAllowedVendors")) return true;
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
         var str = "";
