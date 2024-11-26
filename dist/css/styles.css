@@ -82,8 +82,13 @@
 *,
 *::before,
 *::after {
-  /*box-sizing: border-box;*/
+  box-sizing: border-box;
+  
+}
+
+.amsify-selection-label{
   border-radius: 5px;
+  box-sizing: unset;
 }
 
 
