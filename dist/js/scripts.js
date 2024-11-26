@@ -75,6 +75,7 @@ function createHttpRequest(url, callback, options) {
 
 
 function populatePurposeSelect(){
+    if(!document.getElementById("purpose")) return true;
     var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=purposes";
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
@@ -89,7 +90,7 @@ function populatePurposeSelect(){
 }
 
 function populateVendorSelect(){
-
+    if(!document.getElementById("vendor")) return true;
     createHttpRequest("http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getAllowedVendors", function(ret){
         var data = JSON.parse(ret);
         
