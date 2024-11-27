@@ -119,11 +119,12 @@ function getAllowedVendorList(){
 
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
-     /*if(document.getElementById(elemName).value == "0"){
+     const selectedOptions = Array.from(selectElement.selectedOptions);
+     if(selectedOptions.length === 0){
         var selectedOptions = Array.from(selectElement.options);
-     }else{*/
+     }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
-     /*}*/
+     }
      var selectedValues = selectedOptions.map(function(option) {
                 return option.value;
               });
@@ -164,8 +165,7 @@ var url = null;
 //alert(selCase);
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
-        if(selectedValues == "") selectedValues = "0";
-	    else selectedValues = selectedValues.join(",");
+        selectedValues = selectedValues.join(",");
 
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
