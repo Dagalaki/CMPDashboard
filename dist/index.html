@@ -203,6 +203,7 @@
                             </div>
                         </div>
                         <div class="row">
+                            <h4 id="titleStats">Vendor Statistics</h4>
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
@@ -315,12 +316,15 @@ $(document).ready(function () {
                             $('#vendor').amsifySelect({
                                     type: 'amsify'
                                 });
+                            document.getElementById("titleStats").innerHTML = "Vendor Statistics";
                             populateCharts("vendorstats");
+
                         } else if (selectedTabId === 'tabs-2') {
                            
                              $('#purpose').amsifySelect({
                                     type: 'amsify'
                                 });
+                             document.getElementById("titleStats").innerHTML = "Purpose Statistics";
                              populateCharts("purposestats");
                         }
                     }
