@@ -120,7 +120,10 @@ function getAllowedVendorList(){
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
+     alert(initialSelectedOptions.length);
      if(initialSelectedOptions.length === 0){
+        console.log("initital set");
+        console.log(Array.from(selectElement.options));
         var selectedOptions = Array.from(selectElement.options);
      }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
