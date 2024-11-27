@@ -82,14 +82,17 @@ function createHttpRequest(url, callback, options) {
 
 
 function populatePurposeSelect(){
-    if(!document.getElementById("purpose")) return true;
+    /*if(!document.getElementById("purpose")) return true;*/
     var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=purposes";
     createHttpRequest(url, function(ret){
         var d = JSON.parse(ret);
         var htmlStr = "";
         var purposes = d["purposes"];
+        console.log("Response from retrieveVendorlist");
+        console.log(purposes);
         for(var i =0; i< Object.keys(purposes).length; i++){
             htmlStr += "<option value='"+(i+1)+"'>" + purposes[i+1].name + "</option>";
+            console.log(htmlStr);        
         }
         
         document.getElementById("purpose").innerHTML += htmlStr;
