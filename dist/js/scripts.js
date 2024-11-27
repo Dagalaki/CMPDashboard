@@ -9,8 +9,8 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    const allVendors;
-    const allPurposes;
+    const allVendors = null;
+    const allPurposes = null;
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
