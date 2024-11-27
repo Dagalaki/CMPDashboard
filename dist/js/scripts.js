@@ -9,6 +9,9 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
+    const allVendors;
+    const allPurposes;
+
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
     if (sidebarToggle) {
@@ -91,6 +94,8 @@ function populatePurposeSelect(){
         $('#vendor').amsifySelect({
                 type: 'amsify'
             });
+        var selectElement = document.getElementById("purpose");
+        allPurposes = Array.from(selectElement.options);
     });
 }
 
@@ -108,7 +113,10 @@ function populateVendorSelect(){
     $('#vendor').amsifySelect({
                 type: 'amsify'
             });        
+    var selectElement = document.getElementById("vendor");
+    allVendors = Array.from(selectElement.options);
   });
+
 
 }
 
@@ -122,9 +130,9 @@ function getSelectedValues(elemName){
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
      alert(initialSelectedOptions.length);
      if(initialSelectedOptions.length === 0){
-        console.log("initital set");
-        console.log(Array.from(selectElement.options));
-        var selectedOptions = Array.from(selectElement.options);
+       // var selectedOptions = Array.from(selectElement.options);
+        if(elemName == "vendor") var selectedOptions = allVendors;
+        else if(elemName == "purpose") var selectedOptions = allPurposes;
      }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
      }
