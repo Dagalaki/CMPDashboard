@@ -117,6 +117,7 @@ function populateVendorSelect(){
             });        
     var selectElement = document.getElementById("vendor");
     allVendors = Array.from(selectElement.options);
+    populateCharts("vendorstats");
   });
 
 
@@ -130,7 +131,6 @@ function getAllowedVendorList(){
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
-     alert(initialSelectedOptions.length);
      if(initialSelectedOptions.length === 0){
        // var selectedOptions = Array.from(selectElement.options);
         if(elemName == "vendor") var selectedOptions = allVendors;
