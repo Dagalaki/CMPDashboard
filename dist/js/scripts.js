@@ -118,7 +118,7 @@ function getAllowedVendorList(){
 }
 
 function getSelectedValues(elemName){
-     var selectElement = document.getElementById("vendor");
+     var selectElement = document.getElementById(elemName);
      /*if(document.getElementById(elemName).value == "0"){
         var selectedOptions = Array.from(selectElement.options);
      }else{*/
@@ -165,6 +165,7 @@ var url = null;
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
 	selectedValues = selectedValues.join(",");
+    if(selectedValues == "") selectedValues = "0";
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
         if(document.getElementById("vendor").value == "0"){
