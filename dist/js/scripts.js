@@ -119,8 +119,8 @@ function getAllowedVendorList(){
 
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
-     const selectedOptions = Array.from(selectElement.selectedOptions);
-     if(selectedOptions.length === 0){
+     const initialSelectedOptions = Array.from(selectElement.selectedOptions);
+     if(initialSelectedOptions.length === 0){
         var selectedOptions = Array.from(selectElement.options);
      }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
