@@ -119,11 +119,11 @@ function getAllowedVendorList(){
 
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
-     if(document.getElementById("vendor").value == "0"){
+     /*if(document.getElementById(elemName).value == "0"){
         var selectedOptions = Array.from(selectElement.options);
-     }else{
+     }else{*/
         var selectedOptions = Array.from(selectElement.selectedOptions);
-     }
+     /*}*/
      var selectedValues = selectedOptions.map(function(option) {
                 return option.value;
               });
