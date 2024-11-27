@@ -307,7 +307,23 @@
 
 $(document).ready(function () {
             $( function() {
-                $( "#tabs" ).tabs();
+                $( "#tabs" ).tabs({
+                    activate: function (event, ui){
+                        const selectedTabId = ui.newPanel.attr('id');
+                       
+                        if (selectedTabId === 'tabs-1') {
+                            $('#vendor').amsifySelect({
+                                    type: 'amsify'
+                                });
+                        } else if (selectedTabId === 'tabs-2') {
+                           
+                             $('#purpose').amsifySelect({
+                                    type: 'amsify'
+                                });
+                        }
+                    }
+
+                });
               } );
 
             $('#vendor').amsifySelect({
