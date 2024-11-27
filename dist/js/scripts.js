@@ -93,7 +93,7 @@ function populatePurposeSelect(){
         }
         
         document.getElementById("purpose").innerHTML += htmlStr;
-        $('#vendor').amsifySelect({
+        $('#purpose').amsifySelect({
                 type: 'amsify'
             });
         var selectElement = document.getElementById("purpose");
