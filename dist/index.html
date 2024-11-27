@@ -307,8 +307,34 @@
         <script>
 
 $(document).ready(function () {
+
+            $('#vendor').on('change', function () {
+                const optionZero = $('#vendor option[value="0"]');
+                if (optionZero.prop('selected') === true) {
+                    optionZero.prop('selected', false);
+                }
+            });
+            $('#purpose').on('change', function () {
+                const optionZero = $('#purpose option[value="0"]');
+                if (optionZero.prop('selected') === true) {
+                    optionZero.prop('selected', false);
+                }
+            });
+
             $( function() {
                 $( "#tabs" ).tabs({
+                    change: function (){
+
+                        if (selectedTabId === 'tabs-1') {
+                            const optionZero = $('#vendor option[value="0"]');
+                        }else if(selectedTabId === 'tabs-2') {
+                            const optionZero = $('#purpose option[value="0"]');
+                        }
+                            if (optionZero.prop('selected') === true) {
+                                optionZero.prop('selected', false);
+                            }
+
+                    },
                     activate: function (event, ui){
                         const selectedTabId = ui.newPanel.attr('id');
                        
@@ -316,6 +342,7 @@ $(document).ready(function () {
                             $('#vendor').amsifySelect({
                                     type: 'amsify'
                                 });
+                            
                             document.getElementById("titleStats").innerHTML = "Vendor Statistics";
                             populateCharts("vendorstats");
 

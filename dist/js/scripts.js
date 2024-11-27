@@ -131,6 +131,25 @@ function getAllowedVendorList(){
     return allowedVendors;
 }
 
+function isDefaultSelected(elemName){
+    var selectElement = document.getElementById(elemName);
+   
+    var selOptions = $('#vendor').amsifySelect('getSelectedOptions');
+   console.log("selOptions");
+   console.log(selOptions);
+
+   var selectedIds = selOptions.map(function (option) {
+            return option.value; // 'value' holds the ID of the selected option
+        });
+
+  
+   console.log("selected ids");
+   console.log(selectedIds.prevObject);
+    if(selectedIds.prevObject.length == 1){
+        alert();
+    }
+}
+
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
@@ -185,7 +204,8 @@ var url = null;
 
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
-        if(document.getElementById("vendor").value == "0" || allVendors.length > 0){
+    //isDefaultSelected("vendor");
+        if(document.getElementById("vendor").value == "0"){
             url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=VendorConsentStatistics&from="+from+"&to="+to;
         }else {
             urlTotal = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=VendorConsents&selected="+selectedValues+"&from="+from+"&to="+to;
@@ -208,7 +228,7 @@ var url = null;
 	selectedValues = selectedValues.join(",");
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
-        if(document.getElementById("purpose").value == "0" || allPurposes.length > 0){
+        if(document.getElementById("purpose").value == "0"){
             url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=getOverallStats&table=PurposeConsentStatistics&from="+from+"&to="+to;
         }else {
             urlTotal = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action=total&table=PurposeConsents&selected="+selectedValues+"&from="+from+"&to="+to;
