@@ -161,7 +161,9 @@ function getSelectedValues(elemName){
         var selectedOptions = Array.from(selectElement.selectedOptions);
      }
      var selectedValues = selectedOptions.map(function(option) {
-                return option.value;
+                if (option.value !== "0") {
+                    return option.value;
+                }
               });
      return selectedValues;
 }
