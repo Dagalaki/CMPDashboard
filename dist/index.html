@@ -315,11 +315,13 @@ $(document).ready(function () {
                             $('#vendor').amsifySelect({
                                     type: 'amsify'
                                 });
+                            populateCharts("vendorstats");
                         } else if (selectedTabId === 'tabs-2') {
                            
                              $('#purpose').amsifySelect({
                                     type: 'amsify'
                                 });
+                             populateCharts("purposestats");
                         }
                     }
 
