@@ -164,8 +164,9 @@ var url = null;
 //alert(selCase);
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
-	selectedValues = selectedValues.join(",");
-    if(selectedValues == "") selectedValues = "0";
+        if(selectedValues == "") selectedValues = "0";
+	    else selectedValues = selectedValues.join(",");
+
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
         if(document.getElementById("vendor").value == "0"){
