@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: *"); 
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); 
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); 
 
 if(isset($_GET["action"]) && $_GET["action"] == "vendors"){
     $allowedVendorsUrl = "http://smarttv.anixa.tv/cmp2.2/src/vendorsDE.json";
