@@ -7,10 +7,12 @@
 // Scripts
 // 
 
+let allVendors;
+let allPurposes;
+
 window.addEventListener('DOMContentLoaded', event => {
 
-    const allVendors = null;
-    const allPurposes = null;
+    
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');
