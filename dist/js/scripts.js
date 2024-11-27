@@ -203,7 +203,9 @@ var url = null;
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
         selectedValues = selectedValues.join(",");
-
+        if (selectedValues.startsWith(",")) {
+            selectedValues = selectedValues.substring(1);
+        }
 	console.log("Selected Vendors:");
 	console.log(selectedValues);
     //isDefaultSelected("vendor");
@@ -228,6 +230,9 @@ var url = null;
         console.log(selectedValues.length);
         console.log(document.getElementById("purpose"));
 	selectedValues = selectedValues.join(",");
+    if (selectedValues.startsWith(",")) {
+        selectedValues = selectedValues.substring(1);
+    }
 	console.log("Selected Purposes: ");
 	console.log(selectedValues);
         if(document.getElementById("purpose").value == "0"){
