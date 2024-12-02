@@ -14,7 +14,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: labels,
     datasets: [{
-      label: "Sessions",
+      label: "Percentage",
       lineTension: 0.1,
       backgroundColor: "#9ce0b7",
       borderColor: "#51bf7d",
