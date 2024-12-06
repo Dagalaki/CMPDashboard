@@ -27,7 +27,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
     die("Invalid JSON data: " . json_last_error_msg());
 }
 
-$vendors = $data['vendors'] ?? [];
+$globalVendorIds = array_keys($data['vendors'] ?? []);
 
 $query = "SELECT TCFv2_ID FROM AllowedVendors";
 $result = $conn->query($query);
