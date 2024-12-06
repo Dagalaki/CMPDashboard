@@ -29,7 +29,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 $globalVendorIds = array_keys($data['vendors'] ?? []);
 
-$query = "SELECT TCFv2_ID FROM AllowedVendors";
+$query = "SELECT TCFv2_ID, Vendor FROM AllowedVendors";
 $result = $conn->query($query);
 
 if (!$result) {
@@ -38,7 +38,7 @@ if (!$result) {
 
 $allowedVendors = [];
 while ($row = $result->fetch_assoc()) {
-    $allowedVendors[] = $row['TCFv2_ID'];
+    $allowedVendors[] = $row;
 }
 $missingVendors = array_filter($allowedVendors, function ($vendor) use ($globalVendorIds) {
     return !in_array($vendor['TCFv2_ID'], $globalVendorIds);
