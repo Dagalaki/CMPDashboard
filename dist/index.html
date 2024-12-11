@@ -127,6 +127,9 @@
                 <ul>
                     <li><a href="#tabs-1">Vendors</a></li>
                     <li><a href="#tabs-2">Purposes</a></li>
+                    <li><a href="#tabs-3">Leg Int Purposes</a></li>
+                    <li><a href="#tabs-4">Leg Int Vendors</a></li>
+                    <li><a href="#tabs-5">Special Features</a></li>
                 </ul>
                 <div id="tabs-1">
                     <h4>Select vendors: </h4>
@@ -141,6 +144,27 @@
                         <option value="0">ALL PURPOSES</option>
                       </select>
                       <button id="load-btn" onclick="populateCharts('purposestats');">Load Purposes Statistics</button>
+                </div>
+                <div id="tabs-3">
+                     <h4>Select Purpose Legitimate Interest: </h4>
+                    <select id="leg-int-purposes" multiple searchable>
+                        <option value="0">All Leg Interests</option>
+                      </select>
+                      <button id="load-btn" onclick="populateCharts('legIntPurposeStats');">Load Purpose Legitimate Interests Statistics</button>
+                </div>
+                <div id="tabs-4">
+                    <h4>Select Vendor Legitimate Interest: </h4>
+                    <select id="leg-int-vendors" multiple searchable>
+                        <option value="0">All Leg Interests</option>
+                      </select>
+                      <button id="load-btn" onclick="populateCharts('legIntVendorStats');">Load Vendor Legitimate Interests Statistics</button>
+                </div>
+                 <div id="tabs-5">
+                    <h4>Select Special Features: </h4>
+                    <select id="special-features" multiple searchable>
+                        <option value="0">All Features</option>
+                      </select>
+                      <button id="load-btn" onclick="populateCharts('specialFeaturesStats');">Load Special Features Statistics</button>
                 </div>
             </div>
         </td>
@@ -335,6 +359,24 @@ $(document).ready(function () {
                                 });
                              document.getElementById("titleStats").innerHTML = "Purpose Statistics";
                              populateCharts("purposestats");
+                        }else if(selectedTabId === 'tabs-3'){
+                             $('#leg-int-purposes').amsifySelect({
+                                    type: 'amsify'
+                                });
+                             document.getElementById("titleStats").innerHTML = "Purposes Legitimate Interests Statistics";
+                             populateCharts("legIntPurposeStats");
+                        }else if(selectedTabId === 'tabs-4'){
+                             $('#leg-int-vendors').amsifySelect({
+                                    type: 'amsify'
+                                });
+                             document.getElementById("titleStats").innerHTML = "Vendors Legitimate Interests Statistics";
+                             populateCharts("legIntVendorStats");
+                        }else if(selectedTabId === 'tabs-5'){
+                             $('#special-features').amsifySelect({
+                                    type: 'amsify'
+                                });
+                             document.getElementById("titleStats").innerHTML = "Special Features Statistics";
+                             populateCharts("specialFeaturesStats");
                         }
                     }
 
@@ -345,6 +387,15 @@ $(document).ready(function () {
                 type: 'amsify'
             });
             $('#purpose').amsifySelect({
+                type: 'amsify'
+            });
+            $('#leg-int-purposes').amsifySelect({
+                type: 'amsify'
+            });
+            $('#leg-int-vendors').amsifySelect({
+                type: 'amsify'
+            });
+            $('#special-purposes').amsifySelect({
                 type: 'amsify'
             });
         });

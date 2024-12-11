@@ -29,8 +29,15 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
     populateVendorSelect();
-    populatePurposeSelect();
+    
+    //populatePurposeSelect();
    
+    populateSelectBox("purpose", "purposes");
+    populateSelectBox("leg-int-purposes", "purposes");
+    //populateSelectBox("leg-int-vendors");
+    populateSelectBox("special-features", "specialFeatures");
+
+
     loadAllowedVendors();
 
 });
@@ -80,6 +87,36 @@ function createHttpRequest(url, callback, options) {
     return req;
 }
 
+function populateSelectBox(selBoxId, section){
+    var url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/retrieveVendorlist.php?action=purposes";
+    createHttpRequest(url, function(ret){
+        var d = JSON.parse(ret);
+        var htmlStr = "";
+        var entries = d[""+section+""];
+        console.log("Response from retrieveVendorlist");
+        console.log(entries);
+        for(var i =0; i< Object.keys(entries).length; i++){
+            htmlStr += "<option value='"+(i+1)+"'>" + entries[i+1].name + "</option>";
+        
+        }
+        
+        document.getElementById(selBoxId).innerHTML += htmlStr;
+        $('#purpose').amsifySelect({
+                type: 'amsify'
+            });
+        $('#leg-int-purposes').amsifySelect({
+                type: 'amsify'
+            });
+        $('#leg-int-vendors').amsifySelect({
+                type: 'amsify'
+            });
+        $('#special-features').amsifySelect({
+                type: 'amsify'
+            });
+        var selectElement = document.getElementById("purpose");
+        allPurposes = Array.from(selectElement.options);
+    });
+}
 
 function populatePurposeSelect(){
     /*if(!document.getElementById("purpose")) return true;*/
@@ -115,7 +152,11 @@ function populateVendorSelect(){
        
          });
     document.getElementById("vendor").innerHTML += htmlStr;
+    document.getElementById("leg-int-vendors").innerHTML += htmlStr;
     $('#vendor').amsifySelect({
+                type: 'amsify'
+            }); 
+    $('#leg-int-vendors').amsifySelect({
                 type: 'amsify'
             });        
     var selectElement = document.getElementById("vendor");
@@ -155,8 +196,12 @@ function getSelectedValues(elemName){
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
      if(initialSelectedOptions.length === 0){
        // var selectedOptions = Array.from(selectElement.options);
-        if(elemName == "vendor") var selectedOptions = allVendors;
-        else if(elemName == "purpose") var selectedOptions = allPurposes;
+        if(elemName == "vendor" || elemName == "leg-int-vendors") var selectedOptions = allVendors;
+        else if(elemName == "purpose" || elemName == "leg-int-purposes") var selectedOptions = allPurposes;
+        else if(elemName == "special-features") {
+          alert("Not implemented yet!");
+            var selectedOptions = null;
+        }
      }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
      }
@@ -195,11 +240,44 @@ function processRequestToFeedChart(url){
              });
 }
 
+function fintSelectBoxId(extraTabs, tabName) {
+    const found = extraTabs.find(tab => tab.tab === tabName);
+    return found ? found.selectBox : null;
+}
+
+function findTableValue(extraTabs, tabName) {
+    const found = extraTabs.find(tab => tab.tab === tabName);
+    return found ? found.table : null;
+}
+
 function populateCharts(selCase){
+    var extraTabs = [{"tab": "legIntPurposeStats", "table": "PurposeLegIntConsents", "selectBox":"leg-int-purposes"}, {"tab": "legIntVendorStats", "table": "VendorLegIntConsents", "selectBox":"leg-int-vendors"}, {"tab": "specialFeaturesStats", "table": "SpecialFeaturesOptIns", "selectBox":"special-features"}];
+
     var from = document.getElementById("from").value;
     var to = document.getElementById("to").value;
 var url = null; 
-//alert(selCase);
+
+if (extraTabs.some(tab => tab.tab === selCase)){
+    
+        var actions = ["total", "accepted", "refused", "partially_accepted"];
+        var url = null;
+
+        var boxId = fintSelectBoxId(extraTabs, selCase);
+        var selectedValues = getSelectedValues(boxId);
+        selectedValues = selectedValues.join(",");
+        if (selectedValues.startsWith(",")) {
+            selectedValues = selectedValues.substring(1);
+        }
+        var table = findTableValue(extraTabs, selCase);
+        
+        for(var k = 0; k < actions.length; k++){
+            action = actions[k];
+            url = "http://smarttv.anixa.tv/CMPDashboard/dist/assets/demo/requestDBData.php?action="+action+"&table="+table+"&selected="+selectedValues+"&from="+from+"&to="+to;
+            processRequestToFeedChart(url);
+        }
+        return true;
+}
+
    if(selCase == "vendorstats"){
         var selectedValues = getSelectedValues("vendor");
         selectedValues = selectedValues.join(",");
