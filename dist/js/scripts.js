@@ -9,6 +9,7 @@
 
 let allVendors;
 let allPurposes;
+let allFeatures;
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -115,6 +116,8 @@ function populateSelectBox(selBoxId, section){
             });
         var selectElement = document.getElementById("purpose");
         allPurposes = Array.from(selectElement.options);
+        var selectElement = document.getElementById("special-features");
+        allFeatures = Array.from(selectElement.options);
     });
 }
 
@@ -198,10 +201,7 @@ function getSelectedValues(elemName){
        // var selectedOptions = Array.from(selectElement.options);
         if(elemName == "vendor" || elemName == "leg-int-vendors") var selectedOptions = allVendors;
         else if(elemName == "purpose" || elemName == "leg-int-purposes") var selectedOptions = allPurposes;
-        else if(elemName == "special-features") {
-          alert("Not implemented yet!");
-            var selectedOptions = null;
-        }
+        else if(elemName == "special-features") var selectedOptions = allFeatures;
      }else{
         var selectedOptions = Array.from(selectElement.selectedOptions);
      }
