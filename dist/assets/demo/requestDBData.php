@@ -120,6 +120,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 
 		if (!$result) {
 	       $response = [
+	       		"action" => $action, 
 	            "success" => false,
 	            "error" => $conn->error,
 	            "query" => $query
@@ -141,6 +142,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 		}
 
 		$response = [
+			"action" => $action, 
 			"query" => $query,
 		    "labels" => $labels,
 		    "pr_data" => $pr_data,
@@ -159,6 +161,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 
 		if (!$result) {
 	       $response = [
+	       	"action" => $action, 
 	            "success" => false,
 	            "error" => $conn->error,
 	            "query" => $query
@@ -181,6 +184,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 			}
 
 			$ret = [
+				"action" => $action, 
 				'query' => $query,
 			    'labels' => $labels,
 			    'total' => $data
@@ -197,6 +201,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 			$result = $conn->query($query);
 			if (!$result) {
 		       $response = [
+		       	"action" => $action, 
 		            "success" => false,
 		            "error" => $conn->error,
 		            "query" => $query
@@ -218,6 +223,7 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 			}
 
 			$ret = [
+				"action" => $action, 
 				'query' => $query,
 			    'labels' => $labels,
 			    'pr_data' => $data
@@ -239,6 +245,7 @@ if($tableName == "SpecialFeaturesOptIns") $fieldName = "feature_id";
 
 			if (!$result) {
 		       $response = [
+		       	"action" => $action, 
 		            "success" => false,
 		            "error" => $conn->error,
 		            "query" => $query
@@ -259,6 +266,7 @@ if($tableName == "SpecialFeaturesOptIns") $fieldName = "feature_id";
 			}
 
 			$ret = [
+				"action" => $action, 
 				'query' => $query,
 			    'labels' => $labels,
 			    'r_data' => $data
@@ -279,6 +287,7 @@ if($tableName == "SpecialFeaturesOptIns") $fieldName = "feature_id";
 
 			if (!$result) {
 		       $response = [
+		       	"action" => $action, 
 		            "success" => false,
 		            "error" => $conn->error,
 		            "query" => $query
@@ -299,6 +308,7 @@ if($tableName == "SpecialFeaturesOptIns") $fieldName = "feature_id";
 			}
 
 			$ret = [
+				"action" => $action, 
 				'query' => $query,
 			    'labels' => $labels,
 			    'a_data' => $data
