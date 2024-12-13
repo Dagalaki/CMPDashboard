@@ -197,9 +197,14 @@ function isDefaultSelected(elemName){
 function getSelectedValues(elemName){
      var selectElement = document.getElementById(elemName);
      const initialSelectedOptions = Array.from(selectElement.selectedOptions);
-     if(initialSelectedOptions.length === 0){
-       // var selectedOptions = Array.from(selectElement.options);
-        if(elemName == "vendor" || elemName == "leg-int-vendors") var selectedOptions = allVendors;
+     var selectedValues = initialSelectedOptions.map(function(option) {
+            return option.value;
+        }).filter(function(value) {
+            return value !== undefined;
+        });
+
+     if(initialSelectedOptions.length === 0 || (selectedValues.length === 1 && selectedValues[0] === "0" )  ){
+       if(elemName == "vendor" || elemName == "leg-int-vendors") var selectedOptions = allVendors;
         else if(elemName == "purpose" || elemName == "leg-int-purposes") var selectedOptions = allPurposes;
         else if(elemName == "special-features") var selectedOptions = allFeatures;
      }else{
