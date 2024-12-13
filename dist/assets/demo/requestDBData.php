@@ -159,7 +159,9 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 		if($tableName == "SpecialFeaturesOptIns") $fieldName = "feature_id";
 		$query = "SELECT DATE(all_users.consent_date) AS consent_date,COUNT(DISTINCT edited_users.user_id) AS total_users_edited_consent FROM (SELECT DISTINCT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE DATE(timestamp) BETWEEN '".$from."' AND '".$to."') AS all_users JOIN (SELECT user_id, DATE(timestamp) AS consent_date FROM ".$tableName." WHERE ".$fieldName." IN (".$selected.") AND DATE(timestamp) BETWEEN '".$from."' AND '".$to."' GROUP BY user_id, ".$fieldName.", DATE(timestamp) HAVING COUNT(*) >= 1) AS edited_users ON all_users.user_id = edited_users.user_id AND all_users.consent_date = edited_users.consent_date GROUP BY DATE(edited_users.consent_date) ORDER BY edited_users.consent_date";
 
-		if (!$result) {
+		
+		$result = $conn->query($query);
+if (!$result) {
 	       $response = [
 	       	"action" => $action, 
 	            "success" => false,
@@ -169,8 +171,6 @@ if (isset($_GET['action']) && $_GET['action'] === "addVendor") {
 	        echo json_encode($response);
 	        exit;
 	    }
-		$result = $conn->query($query);
-
 			if ($result === false) {
 			    die("(".$q.")Error in query execution: " . $conn->error);
 			}
