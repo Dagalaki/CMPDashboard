@@ -478,7 +478,8 @@ $(document).ready(function () {
   </script>
         <script>
             //'https://vendor-list.consensu.org/v3/vendor-list.json'
-            fetch("vendorlist.json")
+            //fetch("vendorlist.json")
+            fetch("/CMPDashboard/dist/assets/demo/retrieveVendorlist.php")
     .then((response) => response.json())
     .then((json) => {
         var purposes = json["purposes"];
