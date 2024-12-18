@@ -127,8 +127,8 @@
                 <ul>
                     <li><a href="#tabs-1">Vendors</a></li>
                     <li><a href="#tabs-2">Purposes</a></li>
-                    <li><a href="#tabs-3">Leg Int Purposes</a></li>
-                    <li><a href="#tabs-4">Leg Int Vendors</a></li>
+                    <li><a href="#tabs-3">Purpose Legitimate Interests</a></li>
+                    <li><a href="#tabs-4">Vendor Legitimate Interests</a></li>
                     <li><a href="#tabs-5">Special Features</a></li>
                 </ul>
                 <div id="tabs-1">
@@ -344,7 +344,17 @@ $(document).ready(function () {
                     activate: function (event, ui){
                         const selectedTabId = ui.newPanel.attr('id');
                        
+                        
                         if (selectedTabId === 'tabs-1') {
+                            $("#purpose").val(null);
+                            $("#purpose").amsifySelect().refresh();
+                            $("#leg-int-purposes").val(null);
+                            $("#leg-int-purposes").amsifySelect().refresh();
+                             $("#leg-int-vendors").val(null);
+                            $("#leg-int-vendors").amsifySelect().refresh();
+                             $("#special-features").val(null);
+                            $("#special-features").amsifySelect().refresh();
+
                             $('#vendor').amsifySelect({
                                     type: 'amsify'
                                 });
